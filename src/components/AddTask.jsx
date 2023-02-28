@@ -1,19 +1,33 @@
 import React from "react";
 
-export const AddTask = ({ listTask, setListTask }) => {
+export const AddTask = ({ listTask, setListTask, task, setTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const dateTime = new Date();
-    const newEntry = {
-      id: dateTime.getTime(),
-      name: e.target.task.value,
-      time: `${dateTime.toLocaleTimeString()} ${dateTime.toLocaleDateString()}`,
-    };
-    setListTask([...listTask, newEntry]);
+    if (task.id) {
+      const newDate = new Date();
+      const updatedTask = listTask.map((todo) =>
+        todo.id === task.id
+          ? {
+              id: task.id,
+              name: task.name,
+              time: `${newDate.toLocaleTimeString()} ${newDate.toLocaleDateString()}`,
+            }
+          : todo
+      );
+      setListTask(updatedTask);
+    } else {
+      const dateTime = new Date();
+      const newEntry = {
+        id: dateTime.getTime(),
+        name: e.target.task.value,
+        time: `${dateTime.toLocaleTimeString()} ${dateTime.toLocaleDateString()}`,
+      };
+      setListTask([...listTask, newEntry]);
 
-    //clear after adding the task
-    e.target.task.value = "";
+      //clear after adding the task
+      e.target.task.value = "";
+    }
   };
   return (
     <section className="addTask">
@@ -24,6 +38,8 @@ export const AddTask = ({ listTask, setListTask }) => {
           autoComplete="off"
           placeholder="Add Task"
           maxLength="30"
+          value={task.name}
+          onChange={(e) => setTask({ ...task, name: e.target.value })}
         />
         <button type="submit">Add Task</button>
       </form>

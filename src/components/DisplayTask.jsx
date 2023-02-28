@@ -8,7 +8,7 @@ export const DisplayTask = ({ listTask, setListTask, task, setTask }) => {
 
   const handleDelete = (id) => {
     const newTaskList = listTask.filter((todo) => todo.id !== id);
-    setListTask({ name: newTaskList });
+    setListTask(newTaskList);
   };
 
   return (
@@ -18,7 +18,7 @@ export const DisplayTask = ({ listTask, setListTask, task, setTask }) => {
           <span className="title">Todo</span>
           <span className="count">{listTask.length}</span>
         </div>
-        <button className="clearAll" onClick={() => setListTask([])}>
+        <button onClick={() => setListTask([])} className="clearAll">
           Delete All
         </button>
       </div>

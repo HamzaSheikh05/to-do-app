@@ -16,6 +16,7 @@ export const AddTask = ({ listTask, setListTask, task, setTask }) => {
           : todo
       );
       setListTask(updatedTask);
+      setTask({});
     } else {
       const dateTime = new Date();
       const newEntry = {
@@ -26,7 +27,7 @@ export const AddTask = ({ listTask, setListTask, task, setTask }) => {
       setListTask([...listTask, newEntry]);
 
       //clear after adding the task
-      e.target.task.value = "";
+      setTask({});
     }
   };
   return (
@@ -38,7 +39,7 @@ export const AddTask = ({ listTask, setListTask, task, setTask }) => {
           autoComplete="off"
           placeholder="Add Task"
           maxLength="30"
-          value={task.name}
+          value={task.name || ""}
           onChange={(e) => setTask({ ...task, name: e.target.value })}
         />
         <button type="submit">Add Task</button>

@@ -202,7 +202,7 @@ header .themeSelector .activeTheme {
   align-items: center;
 }
 
-.showTask p.head span:first-child {
+.showTask .head span:first-child {
   flex-grow: 1;
 }
 

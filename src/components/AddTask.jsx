@@ -42,7 +42,7 @@ export const AddTask = ({ listTask, setListTask, task, setTask }) => {
           value={task.name || ""}
           onChange={(e) => setTask({ ...task, name: e.target.value })}
         />
-        <button type="submit">Add Task</button>
+        <button type="submit">{task.id ? "Update Task" : "Add Task"}</button>
       </form>
     </section>
   );
